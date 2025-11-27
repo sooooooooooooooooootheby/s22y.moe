@@ -1,0 +1,33 @@
+name: Deploy Code to Server
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+    SSH_HOST: ${{ secrets.SSH_HOST }}
+    SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    DEPLOY_SCRIPT: /home/aliceclodia/update_s22y.sh
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 部署到远程服务器并执行脚本
+              uses: appleboy/ssh-action@v1.0.0
+              with:
+                  host: ${{ env.SSH_HOST }}
+                  username: ${{ env.SSH_USERNAME }}
+                  key: ${{ env.SSH_PRIVATE_KEY }}
+                  port: ${{ env.SSH_PORT }}
+
+                  script: |
+                      echo "--- 开始执行部署脚本 ---"
+
+                      # 执行指定的部署脚本
+                      ${{ env.DEPLOY_SCRIPT }}
+
+                      echo "--- 部署脚本执行完毕 ---"
