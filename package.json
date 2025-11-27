@@ -1,0 +1,35 @@
+{
+	"name": "s22y-moe",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"prettier": "prettier . --write"
+	},
+	"dependencies": {
+		"@nuxt/content": "3.8.2",
+		"@tailwindcss/vite": "^4.1.17",
+		"better-sqlite3": "^12.4.6",
+		"engine.io": "^6.6.4",
+		"nuxt": "^4.2.1",
+		"nuxt-studio": "1.0.0-alpha.2",
+		"prettier": "^3.6.2",
+		"prettier-plugin-tailwindcss": "^0.7.1",
+		"socket.io": "^4.8.1",
+		"socket.io-client": "^4.8.1",
+		"tailwind-scrollbar-hide": "^4.0.0",
+		"tailwindcss": "^4.1.17",
+		"vue": "^3.5.24",
+		"vue-router": "^4.6.3",
+		"zod": "^4.1.13"
+	},
+	"packageManager": "pnpm@10.15.1+sha512.34e538c329b5553014ca8e8f4535997f96180a1d0f614339357449935350d924e22f8614682191264ec33d1462ac21561aff97f6bb18065351c162c7e8f6de67",
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"tailwindcss-pattern": "^0.1.0"
+	}
+}

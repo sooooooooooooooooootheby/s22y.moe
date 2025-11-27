@@ -1,0 +1,53 @@
+@import "tailwindcss";
+@plugin "tailwindcss-pattern";
+@import "tailwind-scrollbar-hide/v4";
+
+@import "./post.css";
+@import "./crt.css";
+
+* {
+	@apply scrollbar-hide;
+}
+
+body {
+	@apply text-text font-[Tamzen] text-[15px];
+}
+
+body::before {
+	content: " ";
+	display: block;
+	position: fixed;
+	inset: 0;
+	background: rgba(18, 16, 16, 0.1);
+	z-index: 30;
+	background-size:
+		100% 2px,
+		3px 100%;
+	pointer-events: none;
+}
+
+@font-face {
+	font-family: Tamzen;
+	src: url("/font/Tamzen8x15r.ttf");
+}
+
+::selection {
+	@apply bg-text/25;
+}
+
+@theme {
+	--color-bg: #0f111a;
+	--color-text: #e0def4;
+	/* 通用 */
+	--color-iris-main: #c4a7e7;
+	--color-iris-moon: #c4a7e7;
+	--color-iris-dawn: #907aa9;
+	/* 在组件中使用 rose 突出 */
+	--color-rose-main: #ebbcba;
+	--color-rose-moon: #ea9a97;
+	--color-rose-dawn: #d7827e;
+	/* 在正文中使用 foam 突出 */
+	--color-foam-main: #9ccfd8;
+	--color-foam-moon: #9ccfd8;
+	--color-foam-dawn: #56949f;
+}
