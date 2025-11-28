@@ -6,6 +6,11 @@ export default defineContentConfig({
 		page: defineCollection({
 			type: "page",
 			source: "**/**.md",
+			schema: z.object({
+				title: z.string(),
+				priority: z.number(),
+				published: z.boolean(),
+			}),
 		}),
 		blog: defineCollection({
 			type: "page",

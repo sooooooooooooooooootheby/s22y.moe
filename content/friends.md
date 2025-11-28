@@ -1,3 +1,9 @@
+---
+title: Friend
+priority: 4
+published: true
+---
+
 # These are my friends on the Internet.
 
 - Only accepting applications from non-commercial personal blogs

@@ -1,3 +1,9 @@
+---
+title: Project
+priority: 3
+published: true
+---
+
 # My All Projects
 
 I enjoy making some useless little gadgets, and I would be very happy if they could help you.
