@@ -7,7 +7,7 @@
 If you want to exchange friendship links with me, you might leave a message here -> [GitHub](https://github.com/sooooooooooooooooootheby/s22y.moe/issues)
 
 ::friendslist
-::friendsitem{image="https://avatars.githubusercontent.com/u/120046369?v=4" path= "/"}
+::friendsitem{image="https://gravatar.s22y.moe/avatar/me" path= "/"}
 #name
 Sooooooooooooooooootheby
 #describe
