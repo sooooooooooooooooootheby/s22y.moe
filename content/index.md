@@ -7,40 +7,40 @@ published: true
 ::info
 ::
 
-hhi! I am `sooooooooooooooooootheby`, you can also call me `s22y` or `alice`!
+嗨嗨嗨! 我是 `sooooooooooooooooootheby`, 你也可以叫我 `s22y` or `alice`.
 
-I like using `Nuxt` to develop full-stack projects; I'm a so-so ~~full-stack engineer~~. Recently, I've been learning `Java` because I need it for my graduation project (thesis).
+`alice` 的全名是 `Alice Clodia`, 这是一个吸血鬼的名字.
+
+我喜欢使用 `Nuxt` 来开发全栈项目, 我是个全栈工程师(大概). 不过我最近在学习 `Java`, 因为我需要它来完成我的毕业设计.
 
 ## Blog
 
-Whenever I encounter a strange problem and successfully solve it, I'll record it on my Blog.
+当我遇到一些奇怪的问题并解决它了, 我会写在博客上.
 
-Or if I learn a new skill, I'll also write it down.
+又或者我学会了一项新的技能, 我也会记录下来.
 
 -> [Blog](/blog)
 
 ## Project
 
-I enjoy making some useless little gadgets, and I would be very happy if they could help you.
+我喜欢制作一些无用的小工具, 如果这些小工具能帮助到你, 我会很高兴.
 
 -> [Project](/project)
 
 ## Contact
 
-You can find me by the names `sooooooooooooooooootheby` or `s22y` on various platforms, provided I'm there.
+你可以在各种平台上通过 `sooooooooooooooooootheby` or `s22y` 找到我, 前提是我在那.
 
 - [Github](https://github.com/sooooooooooooooooootheby)
 - [Twitter](https://x.com/sooootheby)
 - [Linux.do](https://linux.do/u/s22y/summary)
 
-The above names are for social platforms. If you run into a player named `AliceIClodia` or `AliceHClodia` in a game, that's probably me.
+之前是在一些社交平台上适用的, 如果你在游戏中看见 `AliceIClodia` or `AliceHClodia`, 那很可能是我.
 
 ## About this website
 
-This blog is implemented using `Nuxt`.
+本博客使用 `next` 实现。
 
-It was inspired by [vereis.com](https://vereis.com/); I really like retro things.
+它的灵感来自[vereis.com](https://vereis.com/), 我很喜欢复古的东西。
 
-The color scheme comes from [rose pine](https://rosepinetheme.com/zh-cn/palette/): Rose, Foam, Iris.
-
-> If you're curious about why this page is in English while my article is in Chinese, it's because I think English looks better.
+配色来自 [rose pine](https://rosepinetheme.com/zh-cn/palette/): Rose, Foam, Iris.

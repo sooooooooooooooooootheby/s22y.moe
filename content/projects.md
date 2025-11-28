@@ -6,7 +6,7 @@ published: true
 
 # My All Projects
 
-I enjoy making some useless little gadgets, and I would be very happy if they could help you.
+我喜欢制作一些无用的小工具, 如果这些小工具能帮助到你, 我会很高兴.
 
 ::projectlist
 ::projectitem{path="/"}
@@ -19,36 +19,36 @@ A retro blog
 #label
 PinkLine
 #describe
-A modern blog template, which is also the one I used before.
+一个现代的博客模版, 是我之前使用的.
 ::
 ::projectitem{path="https://music.s22y.moe/"}
 #label
 Netease_analyze
 #describe
-A website for lossless audio decoding on Netease.
+一个可以批量解析网易云音乐的网站.
 ::
 ::projectitem{path="https://discord-get-emoticon.vercel.app/"}
 #label
 discord-get-emoticon
 #describe
-A tool for downloading Discord emojis.
+一个可以下载 discord 标签的工具.
 ::
 ::projectitem{path="https://www.nhit.edu.kg/"}
 #label
 North Harbin Institute of Technology
 #describe
-I purchased the domain name 'edu.kg', and then this website was created.
+我购买了一个edu的二级域名 'edu.kg', 然后就有了这个网站.
 ::
 ::projectitem{path="https://mchead.s22y.moe/"}
 #label
 MC Head
 #describe
-A simple API, through which you can obtain your Minecraft skin and then turn it into an avatar.
+一个简单的 API, 你可以通过它获取你的 Minecraft 皮肤, 然后将其转换为头像.
 ::
 ::projectitem{path="https://github.com/sooooooooooooooooootheby/nuxt-oneko"}
 #label
 Nuxt-oneko
 #describe
-A nuxt plugin, which adds a cat to your website.
+一个 nuxt 插件, 它会在你的网站上添加一个neko.
 ::
 ::

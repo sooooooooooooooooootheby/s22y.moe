@@ -6,11 +6,11 @@ published: true
 
 # These are my friends on the Internet.
 
-- Only accepting applications from non-commercial personal blogs
-- Your friend already has me
-- Don't discuss anything related to politics, NSFW
+- 只接受来自非商业个人博客的申请
+- 你的友链中已经有我了
+- 不要讨论任何与政治有关的东西, NSFW
 
-If you want to exchange friendship links with me, you might leave a message here -> [GitHub](https://github.com/sooooooooooooooooootheby/s22y.moe/issues)
+如果你想和我交换友情链接，你可以在这里留言-> [GitHub](https://github.com/sooooooooooooooooootheby/s22y.moe/issues)
 
 ::friendslist
 ::friendsitem{image="https://gravatar.s22y.moe/avatar/me" path= "/"}

@@ -6,9 +6,9 @@ published: false
 
 # My Blog Posts
 
-Whenever I encounter a strange problem and successfully solve it, I'll record it on my Blog.
+当我遇到一些奇怪的问题并解决它了, 我会写在博客上.
 
-Or if I learn a new skill, I'll also write it down.
+又或者我学会了一项新的技能, 我也会记录下来.
 
 ::bloglist
 ::
