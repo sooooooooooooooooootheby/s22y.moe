@@ -10,12 +10,16 @@
 }
 
 body {
-	@apply text-text bg-[url('/background.webp')] bg-cover bg-center bg-fixed font-[Tamzen] text-[15px];
+	@apply text-text font-display bg-[url('/background.webp')] bg-cover bg-fixed bg-center text-[15px];
 }
 
 @font-face {
 	font-family: Tamzen;
 	src: url("/font/Tamzen8x15r.ttf");
+}
+@font-face {
+	font-family: HYPixel11pxU-2;
+	src: url("/font/HYPixel11pxU-2.ttf");
 }
 
 ::selection {
@@ -23,6 +27,7 @@ body {
 }
 
 @theme {
+	--font-display: "Tamzen", "HYPixel11pxU-2";
 	--color-bg: #0f111a;
 	--color-text: #e0def4;
 	/* 通用 */

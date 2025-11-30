@@ -23,14 +23,14 @@
 	}
 
 	code {
-		@apply text-foam-main font-[Tamzen] before:content-["`"] after:content-["`"];
+		@apply text-foam-main font-display before:content-["`"] after:content-["`"];
 	}
 
 	pre {
 		@apply overflow-x-scroll;
 
 		code {
-			@apply font-[Tamzen] text-shadow-none before:content-[""] after:content-[""];
+			@apply font-display text-shadow-none before:content-[""] after:content-[""];
 		}
 	}
 
