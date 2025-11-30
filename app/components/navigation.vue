@@ -12,9 +12,9 @@
 					v-for="item in navigation"
 					:key="item.path"
 					@click="navigateTo(item.path)"
-					:class="{ 'px-1.5': isPath(item.path) }"
+					:class="{ 'text-rose-dawn px-1.5': isPath(item.path) }"
 				>
-					{{ item.label }}
+					{{ item.title }}
 				</li>
 			</ul>
 		</div>
