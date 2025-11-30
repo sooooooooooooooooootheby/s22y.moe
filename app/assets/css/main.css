@@ -10,20 +10,7 @@
 }
 
 body {
-	@apply text-text font-[Tamzen] text-[15px];
-}
-
-body::before {
-	content: " ";
-	display: block;
-	position: fixed;
-	inset: 0;
-	background: rgba(18, 16, 16, 0.1);
-	z-index: 30;
-	background-size:
-		100% 2px,
-		3px 100%;
-	pointer-events: none;
+	@apply text-text bg-[url('/background.webp')] bg-cover bg-center bg-fixed font-[Tamzen] text-[15px];
 }
 
 @font-face {
