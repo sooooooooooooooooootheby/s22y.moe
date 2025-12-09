@@ -52,3 +52,22 @@ Nuxt-oneko
 一个 nuxt 插件, 它会在你的网站上添加一个neko.
 ::
 ::
+
+<br />
+
+上面的都是我自己制作的项目, 下面是我 fork 之后自己部署的.
+
+::projectlist
+::projectitem{path="https://gravatar.s22y.moe/"}
+#label
+Gravatar CDN API
+#describe
+Serve avatars from Gravatar with modern WebP/AVIF support, intelligent caching, and graceful fallback handling.
+::
+::projectitem{path="https://hotapi.s22y.moe/"}
+#label
+DailyHot API
+#describe
+一个热榜api, 可以获得大部分平台的排行榜, 或者是新闻.
+::
+::
