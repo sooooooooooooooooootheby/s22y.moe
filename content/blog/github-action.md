@@ -1,125 +1,124 @@
 ---
 pid: 25
-title: 一篇文章教你如何使用Github Actions实现网站自动化部署
+title: An article teaches you how to use Github Actions to achieve website auto deploy
 date: Wed Sep 10 2025 14:16:03 GMT+0800
 sort: maintenance
 ---
 
-原本我一直都是用vercel做托管, 写完代码我只需要把代码推上GitHub, 之后的事情就不需要我操心了.
+Previously, I always used vercel to host websites. After writing the code, I just needed to submit it to github, and vercel would update it automatically, so I didn't have to worry about anything else
 
-但是前两天给服务器写了个网站, 如果用vercel做托管, 会导致大陆的部分玩家没法查看, 所以我们特地买了个国内的vps做了备案.
+But recently I wrote a website for a minecraft server. If vercel is used for hosting, it will cause some players in the Chinese mainland to be unable to view it. Therefore, we specially purchased a domestic vps deployment website
 
-但是问题是vps的配置是2c1.5g, 网站用了nuxt ui4, 这个组件库太大了, 又没有按需导入, vps内存低没法build.
+However, due to the configuration of the vps being 2c1.5g, the website uses nuxt ui4, which is a large component library that is not imported on demand. As a result, the vps memory is too low to build the website.
 
-之前我是在自己的电脑上build之后直接把`.output`推到GitHub上, 服务器只要拉下来就可以跑了.
+so I would build the website on my own computer and then push the `.output` folder to GitHub. The server would simply pull the code down and run it.
 
-但是又遇到了问题, 这个国内的vps它拉取代码总是超时, 我就只能自己在本地build之后用软件手动挪到服务器上, 然后又手动重新部署.
+However, I encountered another problem. The vps always times out when pulling code from github. There's no choice. I can only to manually build the website on my own computer and then move the complete content to the server using a software.
 
-这上面的步骤光是说出来都力竭了, 如果隔三岔五就要改bug, 加内容, 就很累.
+But this is too troublesome. If I have to fix bugs or add new content every now and then, I have to deploy it manually, which is very tiring.
 
-我想起Github有个Actions的功能可以做自动化, 就研究了一下能不能实现GitHub帮我build, 然后把完整的内容直接推到服务器上, 这样我就不用把`.output`放到repo了.
-
----
-
-前排提示 因为这篇文章是一边写工作流一边试错一边写的, 所以可能会存在一些错误, 请以注释为准, 不要盲目cv.
+However, I remembered that GitHub had a feature called Actions that could help me build the website and then push the complete content to the server.
 
 ---
 
-这里用一个nuxt的空白项目作为例子, 为了方便配置环境变量, 我们还会添加 `.env` 文件.
+Tip: Since this article was written while exploring the workflow, there may be some errors. Please refer to the annotations for accuracy and do not blindly cv.
 
-## 配置 vps
+---
 
-我们需要先在自己的电脑上创建一对 openSSH 格式的密钥, 用于之后 GitHub 容器和我们的VPS通讯.
+Here, we take a blank nuxt project as an example. To facilitate the configuration of environment variables, we will also add the '.env 'file.
+
+## Configure vps
+
+We need to first create a pair of openSSH format keys on our own computer for communication between the GitHub container and our VPS later.
 
 ```bash
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-他会问你文件要放在哪, 这里我放在桌面, 也就是输入`C:\Users\${{ secrets.SSH_USER }}\Desktop\authorized_keys.key`
+After executing the above command, it will ask you where to place the file. Here, I put it on the desktop, that is, input`C:\Users\aliceclodia\Desktop\authorized_keys.key`
 
-注意! 这里要输入保存的文件的名字, 否则会报错.
+Attention! Here, you need to enter the name of the saved file; otherwise, an error will be reported.
 
-然后就是密码, 密码是可选的, 不想要密码直接回车就好了.
+Then comes the password. The password is optional. If you don't want it, just press Enter.
 
-保存成功后桌面会有两个文件: `authorized_keys.key` & `authorized_keys.key.pub`
+After successful saving, there will be two files on the desktop: `authorized_keys.key` & `authorized_keys.key.pub`
 
-我们需要将 `authorized_keys.key.pub` 上传到 vps 的 `~/.ssh/`, 并且要去掉 `.key.pub`.
+We need to upload `authorized_keys.key.pub` to the `~/.ssh/` directory of our VPS. And remember to remove the `.key.pub` suffix.
 
-如果 `~/.ssh/` 目录不存在就创建一下就好了.
+If the `~/.ssh/` directory does not exist, just create it.
 
-这样 vps 的配置就完成了
+This completes the configuration of the VPS.
 
-## 配置 Repository secrets
+## Configure Repository secrets
 
-现在先把空白项目上传到GitHub, 进入项目的repo -> settings -> Security -> secrets and variables -> Actions
+Now, let's upload the blank project to GitHub. Then, go to the project's repo -> settings -> Security -> secrets and variables -> Actions
 
-配置 Repository secrets, 这个东西就相当于是仓库的环境变量, 你就当环境变量去配置就好了.
+Configure Repository secrets, which is essentially repository environment variables. You can think of them as environment variables.
 
 ![1](https://image.s22y.moe/image/github_action/2.webp)
 
-这里有三个必填的, 当然, 根据你工作流的不同需要进行调整.
+There are three required ones, although you may need to adjust them based on your workflow.
 
-- SSH_HOST: 服务器地址
-- SSH_PRIVATE_KEY: 刚刚生成的密钥的`.key`, 直接复制内容到这里.
-- SSH_USER: 登录的用户名, 这个用户名取决你前面的`.pub`放在哪个用户的`~/.ssh/`中.
+- SSH_HOST: Server address
+- SSH_PRIVATE_KEY: The `.key` file content of the generated key pair. Copy the content directly here.
+- SSH_USER: The username used to log in to the VPS. This username depends on which user's `~/.ssh/` directory the `.pub` file is placed in.
 
-因为我们还需要添加环境变量, 所以需要添加 `ENV`, 直接将 `.env` 的内容复制进去就好了.
+Since we also need to add environment variables, we need to add `ENV`. Simply copy the content of `.env` into this field.
 
-## 创建工作流
+## Create a workflow
 
-跳转到 repo -> Actions, 根据你的需要选择一个模板, 或者直接点击 `set up a workflow yourself` 创建一个新模板.
+Jump to repo -> Actions, choose a template based on your needs, or click `set up a workflow yourself` to create a new one.
 
-这里虽然有 `NuxtJS` 的模板, 但是我还是喜欢写一个新的.
+Although there is a `NuxtJS` template, but I still prefer to write a new one.
 
-所以直接点击 `set up a workflow yourself`.
+So, click `set up a workflow yourself`.
 
-先配置基础的信息.
+First, configure the basic information.
 
 ```yaml
-# 工作流的名字
+# Workflow name
 name: Build and Deploy
 
-# 使用哪一个分支的代码
+# Trigger the workflow on push to the main branch
 on:
     push:
         branches:
             - main
 ```
 
-然后就是具体的 jobs.
+Then, it's time for the actual jobs.
 
 ```yaml
 jobs:
-    # 这里是构建 job
     build:
-        # job 使用的容器环境
+        # The container used by the job
         runs-on: ubuntu-latest
-        # job 的名字
+        # job 's name
         name: build
 
-        # job 的步骤
+        # job 's steps
         steps:
-            # 将 repo 的代码拿到容器中
+            # Take the repo code into the container
             - name: Checkout code
               uses: actions/checkout@v4
 
-            # 设置 node 环境和 pnpm 包管理器
+            # set node and pnpm package manager
             - name: Set up Node.js and pnpm
               uses: pnpm/action-setup@v4
 
-            # 添加环境变量
-            # 因为我这里使用的是nuxt nuxt会在build时注入环境变量, 所以需要在容器内添加env
+            # add env variables
+            # because I'm using nuxt, nuxt will inject env variables when build, so I need to add env in container
             - name: set env
               run: |
                   echo '${{ secrets.ENV }}' > /home/runner/work/orange/orange/.env
 
-            # 安装依赖和 build
+            # install dependencies and build
             - name: Install dependencies and build
               run: |
                   pnpm install --frozen-lockfile
                   pnpm run build --if-present
 
-            # 设置 SSH
+            # set up ssh
             - name: Set up SSH
               run: |
                   mkdir -p ~/.ssh
@@ -129,18 +128,18 @@ jobs:
               env:
                   SSH_HOST: ${{ secrets.SSH_HOST }}
 
-            # 传输构建完成的产物
+            # upload build to server
             - name: Upload build to server
-              # 这里的前面一截的目录是 build 之后生成文件所在的位置, 这个目录可以通过前面 build 时的日志查找到.
-              # 后面一截的目录就是代表你要上传到服务器的哪个目录.
-              # 这条命令会把整个项目根目录的文件全部推送到服务器目录的 /home/alice/actions 中, 而不是把项目文件`actions`上传到服务器.
+              # The directory in the front section here is the location where the generated file is after build. This directory can be found through the log during the previous build.
+              # The directory at the back section represents which directory you want to upload to the server.
+              # This command will push all the files in the root directory of the entire project to /home/alalice /actions in the server directory instead of uploading the project file 'actions' to the server.
               run: |
                   rsync -avz /home/runner/work/actions/actions/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/actions
               env:
                   SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 ```
 
-注意! 如果你的 vps 修改了端口, 就需要修改一下指令:
+Attention! If your vps has modified the port, you need to modify the command
 
 ```yaml
 - name: Set up SSH
@@ -152,24 +151,24 @@ jobs:
   env:
       SSH_HOST: ${{ secrets.SSH_HOST }}
 
-# 推送文件到服务器
+# upload build to server
 - name: Upload build to server
-  # 这里的前面一截的目录是action build之后生成文件所在的位置, 这个目录可以通过前面build时的日志查找到.
-  # 后面一截的目录就是代表你要上传到服务器的哪个目录.
-  # 这条命令会把整个项目根目录的文件全部推送到服务器目录的/home/alice/orange中, 而不是把项目文件`orange`上传到服务器.
+  # The directory in the front section here is the location where the generated file is after build. This directory can be found through the log during the previous build.
+  # The directory at the back section represents which directory you want to upload to the server.
+  # This command will push all the files in the root directory of the entire project to /home/alalice /actions in the server directory instead of uploading the project file 'actions' to the server.
   run: |
       rsync -avz -e "ssh -p ${{ secrets.SSH_PORT }}" /home/runner/work/actions/actions ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}
   env:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 ```
 
-现在我们可以来写部署的部分了, 前面我已经把生成的文件传输到 vps 上了.
+Now we can start writing the deployment part. I have already transferred the generated file to the vps earlier.
 
 ```yaml
 deploy:
     runs-on: ubuntu-latest
     name: deploy
-    # 这个是必须的, 代表这一步必须要执行完build job
+    # This is mandatory, indicating that this step must complete the build job
     needs: build
 
     steps:
@@ -182,10 +181,10 @@ deploy:
           env:
               SSH_HOST: ${{ secrets.SSH_HOST }}
 
-        # 这里执行的就是依赖安装和部署了, 需要根据你的项目进行修改.
-        # 比如我这里使用的是pnpm + pm2.
-        # 注意! 因为action的ssh是非交互的, 所以你的指令需要根据情况添加参数, 例如 pnpm 的 --prefer-frozen-lockfile, 否则会出现问题.
-        # 注意! action的ssh不会加载用户脚本, 所以他并不知道你的软件, 例如node pnpm的安装目录, 所以你需要手动加载, 或者直接用完整的目录去执行
+        # Here are the commands to install dependencies and deploy the project. You need to modify them according to your project.
+        # For example, I am using pnpm + pm2 here.
+        # Attention! Because the action's ssh is non-interactive, you need to add parameters according to the situation, such as pnpm's --prefer-frozen-lockfile, otherwise there will be problems.
+        # Attention! The ssh of action does not load user scripts, so it does not know your software, such as the installation directory of node pnpm. Therefore, you need to load it manually or execute it directly with the complete directory
         - name: deploy on server
           run: |
               ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
@@ -208,10 +207,10 @@ deploy:
               SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 ```
 
-现在actions的工作流写好了, 当GitHub检测到`.github/workflows/`目录下的文件有变动时就会自动执行actions.
+Now the actions workflow is ready. When GitHub detects that the files in the `.github/workflows/` directory have changed, it will automatically execute the actions.
 
-现在你已经不需要再做什么其他的工作了, 这样你就能全身心投入到代码的编写中而不是手动推送部署项目了.
+Now you don't need to do anything else. You can focus on writing code instead of manually pushing the project to the server.
 
 ![actions](https://image.s22y.moe/image/github_action/1.webp)
 
-下面的报错全是泪, 跟GPT拉扯了一个早上才摸索出正确的做法.
+Below are all the errors I encountered, and it took me a morning to figure out the correct way.

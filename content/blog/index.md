@@ -6,9 +6,13 @@ published: false
 
 # My Blog Posts
 
-当我遇到一些奇怪的问题并解决它了, 我会写在博客上.
+When I encounter some strange problems and solve them, I will write about them on my blog.
 
-又或者我学会了一项新的技能, 我也会记录下来.
+Or when I learn some new skills, I will record them on my blog.
+
+Because this is an English website, so only have some of the translated articles.
+
+All the articles need to be viewed on the [Chinese website](https://blog.s22y.moe/).
 
 ::bloglist
 ::

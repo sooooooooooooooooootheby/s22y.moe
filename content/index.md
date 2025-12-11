@@ -6,41 +6,48 @@ published: true
 
 ::info
 ::
+hhhi! I'm ` sooooooooooooooooootheby`, you can also call me `s22y` or `alice`.
 
-嗨嗨嗨! 我是 `sooooooooooooooooootheby`, 你也可以叫我 `s22y` or `alice`.
+`alice` 's full name is `Alice Clodia`, this is a vampire name.
 
-`alice` 的全名是 `Alice Clodia`, 这是一个吸血鬼的名字.
+I like to use `Nuxt` to develop full-stack project, and I'm a full-stack engineer (It's probably like this).
 
-我喜欢使用 `Nuxt` 来开发全栈项目, 我是个全栈工程师(大概). 不过我最近在学习 `Java`, 因为我需要它来完成我的毕业设计.
+And I have been studying `Java` recently, Because I need it to make my Graduation Project.
 
 ## Blog
 
-当我遇到一些奇怪的问题并解决它了, 我会写在博客上.
+When I encounter some strange problems and solve them, I will write about them on my blog.
 
-又或者我学会了一项新的技能, 我也会记录下来.
+Or when I learn some new skills, I will record them on my blog.
 
 -> [Blog](/blog)
 
 ## Project
 
-我喜欢制作一些无用的小工具, 如果这些小工具能帮助到你, 我会很高兴.
+I enjoy making some useless little tools. If these little tools can be of help to you, I will be very happy.
 
 -> [Project](/project)
 
 ## Contact
 
-你可以在各种平台上通过 `sooooooooooooooooootheby` or `s22y` 找到我, 前提是我在那.
+You can find me on various platforms by `sooooooooooooooooootheby` or `s22y`, as long as I'm there.
 
 - [Github](https://github.com/sooooooooooooooooootheby)
 - [Twitter](https://x.com/sooootheby)
 - [Linux.do](https://linux.do/u/s22y/summary)
 
-之前是在一些社交平台上适用的, 如果你在游戏中看见 `AliceIClodia` or `AliceHClodia`, 那很可能是我.
+The names in front are used on some social platforms. If you see 'AliceIClodia' or 'AliceHClodia' in the game, it's very likely to be me.
 
 ## About this website
 
-本博客使用 `next` 实现。
+This website is built with `Nuxt`.
 
-它的灵感来自[vereis.com](https://vereis.com/), 我很喜欢复古的东西。
+It's inspired by [vereis.com](https://vereis.com/), and I really like the retro style.
 
-配色来自 [rose pine](https://rosepinetheme.com/zh-cn/palette/): Rose, Foam, Iris.
+The color scheme is from [rose pine](https://rosepinetheme.com/zh-cn/palette/): Rose, Foam, Iris.
+
+And This is a English version of the website, if you need Chinese version, please visit [blog.s22y.moe](https://blog.s22y.moe/).
+
+Because my English is not good, I use AI assisted translation. If you find some strange sentences, please leave me a message -> [GitHub](https://github.com/sooooooooooooooooootheby/s22y.moe/issues)
+
+> if you ask me: why to use English in this website? Because I'm think appearance of English characters is better than that of Chinese characters.

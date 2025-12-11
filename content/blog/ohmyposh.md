@@ -1,21 +1,21 @@
 ---
 pid: 26
-title: 教你写一个简单的终端主题
+title: Teach you to write a simple terminal theme
 date: 2025-10-21T08:16:11.000Z
 sort: tool
 ---
 
-前两天才想起 **oh my posh** 支持 `windowss` `Mac` `Linux`, 而且我觉得 **oh my posh** 自带的主题要比 **oh my zsh** 和 **oh my bash** 的好看.
+Two days ago, I discover that **oh my posh** supported `windowss` `Mac` `Linux`, and I thought that the themes of **oh my posh** were much better than those of **oh my zsh** and **oh my bash**.
 
-花了点时间把 Mac 的 **oh my zsh** 换成 **oh my posh**, 翻了一下主题列表, 发现都不是很满意, 打开主题文件, 研究了一下发现还挺简单, 就算不看文档也能看懂.
+I spent a few hours to replace **oh my zsh** on my Mac with **oh my posh**, and I found that none of the themes I liked were available. I opened the theme file and found that it was quite simple to write a theme.
 
-于是我花了半个下午根据文档写了个主题.
+So I spent half an afternoon writing a topic based on the document.
 
 ![posh theme](https://image.s22y.moe/image/ohmyposh/1.webp)
 
 ---
 
-安装就不说了, 很简单的, 一条命令就可以了, Mac 上安装可能会卡在 `go build`, 直接用脚本安装就可以了.
+Installation won't go into detail. It's very simple. Just one command will do. Installation on Mac might get stuck at 'go build', so you can install it directly using a script.
 
 ```bash
 curl -s https://ohmyposh.dev/install.sh | bash -s
@@ -23,11 +23,11 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 
 ---
 
-**oh my posh** 基于块来显示终端的, 所以你只需要通过简单的块来搭建即可.
+**oh my posh** is based on blocks to display the terminal, so you only need to build it by simple blocks.
 
-主题文件默认是 `json` 同时也支持 `toml` `yaml`, 这里用 `json` 因为我觉得json的结构性更强, 看起来更轻松.
+The theme file is default `json`, but also support `toml` `yaml`. I choose `json` because I think it's more structured and easier to read.
 
-下面是一个空白的主题文件, 当你使用这个空白的主题时你的终端只会显示光标和你输入的指令, 不会有其他任何的东西.
+Below is a blank theme file. When you use this blank theme, your terminal will only display the cursor and the command you input.
 
 ```json
 {
@@ -37,25 +37,25 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 }
 ```
 
-稍微解释一下上面各个配置的作用.
+Let me briefly explain the functions of each configuration mentioned above.
 
-- "$schema": 指向一个在线 JSON schema, 用于验证配置文件的语法正确性, 提供智能提示和错误检查(不是什么特别重要的东西, 不要动它就好了).
-- "version": 配置版本, 不要动它就好了.
-- "blocks": 块, 我们写的主题将在这里实现.
+- "$schema": Point to an online JSON schema for verifying the syntactic correctness of configuration files, providing intelligent prompts and error checking (it's not something particularly important, just don't touch it).
+- "version": Configuration version, don't touch it.
+- "blocks": Blocks, where we write our theme.
 
-除去上面的配置, 还有一些其他的配置, 例如:
+Excluding the above configurations, there are some other configurations, such as:
 
-- final_space: 是否需要在命令前添加一个空格
-- maps: 添加自定义文本映射, 例如检测到 root 用户, 会将负责用户显示的变量替换为你自定义的文本.
-- palette: 调色板, 你可以添加一些预设的颜色.
+- final_space: Whether to add a space before the command
+- maps: Add custom text mappings, such as detecting the root user, will replace the variable responsible for displaying the user with your custom text.
+- palette: Palette, you can add some preset colors.
 
-具体的你可以查看[文档](https://ohmyposh.dev/docs/configuration/general#settings)
+For more details, please refer to the [documentation](https://ohmyposh.dev/docs/configuration/general#settings).
 
 ---
 
-现在我们来上手写一个简单的主题(文章末尾会有完整的配置文件, 你不需要担心某个片段应该添加在哪)
+Now let's start writing a simple theme (the complete configuration file will be provided at the end of the article, you don't need to worry about where to add a certain fragment).
 
-先添加一个调色盘, 这可以帮助我们规范颜色, 我这里使用的都是 tailwindcss 里的颜色.
+First, let's add a palette. This can help us standardize colors, and I'm using colors from tailwindcss here.
 
 ```json
 "palette": {
@@ -67,15 +67,15 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 },
 ```
 
-下面是一个块级的选项, 需要添加到 `blocks` 数组中, 在这个块级里面有两个关键的选项:
+Below is a block-level option that needs to be added to the `blocks` array. In this block, there are two critical options:
 
-- alignment: 位置 只能填写 `left` 或 `right`
-- type: 必须保留的选项 填写 `prompt` 或 `rprompt` (填写 rprompt 时块会显示在右边)
-- segments: 段落, 一个块中又有多个段落.
-    - foreground: 调色盘, 使用 `p:` + 上面你预设的颜色名即可
-    - style: 样式 可填写 powerline、plain、diamond、accordion
-    - template: 显示内容的模版
-    - type: 类型 可填写多种类型, 因为太多了, 不是一句两句能说明白的, 具体查看[文档](https://ohmyposh.dev/docs/segments/system/text)
+- alignment: Position, can only be `left` or `right`
+- type: Must be `prompt` or `rprompt` (when filled with `rprompt`, the block will display on the right)
+- segments: Segments, a block can contain multiple segments.
+    - foreground: Palette, use `p:` + the color name you preset above to select a color from the palette.
+    - style: Style, can be `powerline`, `plain`, `diamond`, `accordion`
+    - template: Display content template
+    - type: Type, can be multiple types, as there are too many of them, it's not possible to explain them all in a sentence. For more details, please refer to the [documentation](https://ohmyposh.dev/docs/segments/system/text)
 
 ```json
 {
@@ -98,36 +98,36 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 }
 ```
 
-模版中双花括号中的是变量(或许可以这么理解, 有点像vue).
+In the template, double curly braces `{{ }}` contain variables (perhaps you can understand it like Vue).
 
-下面是通用的变量, 根据段内的 `type` 不同, 变量也有更多的选择.
+Below is a common variable, depending on the `type` of the segment, there are more options for variables.
 
-| 名称            | 类型      | 描述                                                |
+| name            | type      | description                                                |
 | --------------- | --------- | --------------------------------------------------- |
-| `.Root`         | `boolean` | 当前用户是否为 root/admin                           |
-| `.PWD`          | `string`  | 当前工作目录 ($HOME 目录显示为 ~)                   |
-| `.AbsolutePWD`  | `string`  | 当前工作目录 (未修改的原始路径)                     |
-| `.PSWD`         | `string`  | PowerShell 中当前的非文件系统工作目录               |
-| `.Folder`       | `string`  | 当前工作文件夹                                      |
-| `.Shell`        | `string`  | 当前 shell 名称                                     |
-| `.ShellVersion` | `string`  | 当前 shell 版本                                     |
-| `.SHLVL`        | `int`     | 当前 shell 级别                                     |
-| `.UserName`     | `string`  | 当前用户名称                                        |
-| `.HostName`     | `string`  | 主机名                                              |
-| `.Code`         | `int`     | 最后一个退出代码                                    |
-| `.Jobs`         | `int`     | 后台作业的数量 (仅 zsh、PowerShell 和 Nushell 可用) |
-| `.OS`           | `string`  | 操作系统                                            |
-| `.WSL`          | `boolean` | 是否在 WSL 中                                       |
-| `.Templates`    | `string`  | 模板结果                                            |
-| `.PromptCount`  | `int`     | 提示符计数器，每次调用提示符时递增 1                |
-| `.Version`      | `string`  | Oh My Posh 版本                                     |
-| `.Segment`      | `Segment` | 当前片段的元数据                                    |
+| `.Root`         | `boolean` | Whether the current user is root/admin              |
+| `.PWD`          | `string`  | Current working directory ($HOME directory displayed as ~) |
+| `.AbsolutePWD`  | `string`  | Current working directory (unmodified raw path)     |
+| `.PSWD`         | `string`  | PowerShell current working directory (non-file system path) |
+| `.Folder`       | `string`  | Current working folder                                      |
+| `.Shell`        | `string`  | Current shell name                                     |
+| `.ShellVersion` | `string`  | Current shell version                                     |
+| `.SHLVL`        | `int`     | Current shell level                                     |
+| `.UserName`     | `string`  | Current user name                                        |
+| `.HostName`     | `string`  | Host name                                              |
+| `.Code`         | `int`     | Last exit code                                        |
+| `.Jobs`         | `int`     | Number of background jobs (only available in zsh, PowerShell, and Nushell) |
+| `.OS`           | `string`  | Operating system name                                |
+| `.WSL`          | `boolean` | Whether running in WSL                               |
+| `.Templates`    | `string`  | Template result                                      |
+| `.PromptCount`  | `int`     | Prompt counter, incremented by 1 each time the prompt is called |
+| `.Version`      | `string`  | Oh My Posh version                                   |
+| `.Segment`      | `Segment` | Current segment metadata                                    |
 
-模版中的 `\uf178` 是一个 Unicode 转义序列, 会被渲染成一个图标, 你可以在[这里](https://www.nerdfonts.com/cheat-sheet)搜索你想要的图标, 把鼠标放到图标上点击 **UTF** 就可以复制对于的代码.
+In the template, `\uf178` is a Unicode escape sequence that will be rendered as an icon. You can search for the icon you want on [this website](https://www.nerdfonts.com/cheat-sheet), and click **UTF** to copy the corresponding code.
 
-> 注意, 你需要安装并设置终端的字体为 **Nerd Fonts** 系列的字体才能正常显示图标, 这也是你在安装 **oh my posh** 时要求你做的.
+> Note that you need to install and set the terminal font to a **Nerd Fonts** series font to display the icon correctly. This is also something you need to do when installing **oh my posh**.
 
-现在假设你想要换行让命令输入在第二行, 你可以直接添加一个 `\n`, 这样, 命令输入就会跳到第二行了.
+Now let's assume you want to add a line break to move the command input to the second line. You can simply add a `\n` in the template, and the command input will be displayed on the second line.
 
 ```json
 {
@@ -140,11 +140,11 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 
 ---
 
-现在我想要在右边显示内存使用信息, 可以添加下面的块.
+Now let's add a block to display memory usage on the right.
 
-这个内存显示我是从其他的主题文件里面 cv 来的, 所以我也不知道这里面的变量代表什么意思(
+This memory display is from another theme file, so I don't know what these variables mean (
 
-如果你看到其他人的主题中有你想要的东西, 不妨大胆地去看看它的源码, 然后 cv 过来, 只要代码在你的文件里面, 那就是你的代码了!
+If you see something you want in other theme files, just go and check their source code, and copy it over. As long as the code is in your file, it's your code!
 
 ```json
 {
@@ -161,9 +161,9 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 }
 ```
 
-接下来我们加个 github 的状态.
+Next, let's add a status on github.
 
-当然, 这也是我 cv 来的, 我也不知道这些都是什么, 反正可以正常显示就对了!
+Of course, this is also from my cv. I have no idea what these are either. As long as they can be displayed normally, that's fine!
 
 ```json
 {
@@ -180,9 +180,9 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 }
 ```
 
-最后我们再加一个路径显示在第二行.
+Finally, we add another path to display on the second line.
 
-这就是 `type` 不同带来更多的设置, 例如这里是 `path`, 那就可以根据 `path` 的类型添加更多[配置](https://ohmyposh.dev/docs/segments/system/path)
+This is ` type ` bring more different Settings, such as this is ` path `, then you can according to ` path ` type to add more [configuration](https://ohmyposh.dev/docs/segments/system/path)
 
 ```json
 {
@@ -193,10 +193,10 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 			"foreground": "p:violet",
 			"leading_diamond": "<#DCD7FC>{</>",
 			"properties": {
-				"folder_icon": "\uf07b", // 文件夹图标 (Font Awesome)
-				"folder_separator_icon": " \uebcb ", // 路径分隔符图标
-				"home_icon": "home", // 家目录显示为 "home"
-				"style": "agnoster_full" // 使用 agnoster 完整路径样式
+				"folder_icon": "\uf07b", // folder icon (Font Awesome)
+				"folder_separator_icon": " \uebcb ", // folder separator icon (Nerd Fonts)
+				"home_icon": "home", // home directory display as "home"
+				"style": "agnoster_full" // agnoster full path style
 			},
 			"style": "diamond",
 			"template": " \ue5ff {{ .Path }} ",
@@ -211,7 +211,7 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 
 ![](https://image.s22y.moe/image/ohmyposh/2.webp)
 
-完整的代码如下:
+The complete code is as follows:
 
 ```json
 {

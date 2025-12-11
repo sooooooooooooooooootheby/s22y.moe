@@ -1,16 +1,18 @@
 ---
 pid: 27
-title: 关于 vue 中 <template> 标签的作用
+title: The role of the <template> tag in vue
 date: 2025-10-28T10:11:32.000Z
 sort: front-end
 description: ""
 ---
 
-一直以为 `<template>` 只是用于包裹组件html的标签, 但是今天才发现, 原来这个东西可以作为一个逻辑性的包装标签使用.
+I always thought that `<template>` was only used to wrap the html tags of components, but today I found out that this thing can actually be used as a logical packaging tag.
 
-在 vue 文档的[内置特殊元素](https://cn.vuejs.org/api/built-in-special-elements.html#template)中提到"当我们想要使用内置指令而不在 DOM 中渲染元素时，`<template>` 标签可以作为占位符使用。", 听起来可能会很绕, 用一句话来说就是: 如果你想用一些vue的指令, 例如 `v-for`, 可以使用 `<template>` 作为一个虚拟的虚拟容器, 在实际的DOM树中并不会被渲染, 这样可以避免生成无意义的`div`.
+In vue docs [Built-in Special Elements](https://vuejs.org/api/built-in-special-elements.html#template), "The `<template>` tag is used as a placeholder when we want to use a built-in directive without rendering an element in the DOM" is mentioned.
 
-比如下面的情况, 我需要使用 `v-for` 和 `v-if` 去渲染 `<li>` 标签.
+It might sound confusing. To put it in one sentence: If you want to use some vue directives, such as `v-for` and `v-if`, you can use `<template>` as a virtual container. It won't be rendered in the actual DOM tree, thus avoiding the generation of meaningless `div`.
+
+For example, in the following situation, I need to use `v-for` and `v-if` to render the `<li>` tag.
 
 ```html
 <ul>
@@ -20,9 +22,9 @@ description: ""
 </ul>
 ```
 
-如果我这么写, 虽然他不会产生额外的 `div` 之类的容器, 但是 `v-if` 会报错, 因为 `v-for` 和 `v-if` 不能处于同一层, 会导致优先级上的错误.
+If I write it this way, although it won't generate additional containers like `div`, `v-if` will report an error because `v-for` and `v-if` cannot be at the same level, which will lead to an error in priority.
 
-那我只能写成
+Then I can only write it
 
 ```html
 <ul>
@@ -34,9 +36,9 @@ description: ""
 </ul>
 ```
 
-虽然这么写无伤大雅, 但是在DOM树中会出现一个没有任何意义的`div`, 这个时候我们就可以使用 `<template>`.
+Although this way of writing is not harmful, but in the DOM tree, there will be a meaningless `div`, which is not what we want. This time we can use `<template>` to wrap the `<li>` tag.
 
-这样, 即使在代码中会多一层 `<template>`, 但是到了实际的DOM树中并不会多渲染一个元素出来.
+So, even if there is an extra layer of `<template>` in the code, it won't be rendered in the actual DOM tree.
 
 ```html
 <ul>

@@ -6,7 +6,7 @@ published: true
 
 # My All Projects
 
-我喜欢制作一些无用的小工具, 如果这些小工具能帮助到你, 我会很高兴.
+I enjoy making some useless little tools. If these little tools can be of help to you, I will be very happy.
 
 ::projectlist
 ::projectitem{path="/"}
@@ -19,43 +19,43 @@ A retro blog
 #label
 PinkLine
 #describe
-一个现代的博客模版, 是我之前使用的.
+A modern blog template, which I used before.
 ::
 ::projectitem{path="https://music.s22y.moe/"}
 #label
 Netease_analyze
 #describe
-一个可以批量解析网易云音乐的网站.
+A website that can batch parse Netease Cloud Music.
 ::
 ::projectitem{path="https://discord-get-emoticon.vercel.app/"}
 #label
 discord-get-emoticon
 #describe
-一个可以下载 discord 标签的工具.
+A tool that can download Discord emoticons.
 ::
 ::projectitem{path="https://www.nhit.edu.kg/"}
 #label
 North Harbin Institute of Technology
 #describe
-我购买了一个edu的二级域名 'edu.kg', 然后就有了这个网站.
+I purchased a second-level domain 'edu.kg' and then created this website.
 ::
 ::projectitem{path="https://mchead.s22y.moe/"}
 #label
 MC Head
 #describe
-一个简单的 API, 你可以通过它获取你的 Minecraft 皮肤, 然后将其转换为头像.
+A simple API that allows you to get your Minecraft skin and convert it to a avatar.
 ::
 ::projectitem{path="https://github.com/sooooooooooooooooootheby/nuxt-oneko"}
 #label
 Nuxt-oneko
 #describe
-一个 nuxt 插件, 它会在你的网站上添加一个neko.
+A Nuxt plugin that adds a neko to your website.
 ::
 ::
 
 <br />
 
-上面的都是我自己制作的项目, 下面是我 fork 之后自己部署的.
+Above are some of the projects I made myself. Below are some of the projects I forked and deployed myself.
 
 ::projectlist
 ::projectitem{path="https://gravatar.s22y.moe/"}
@@ -68,6 +68,6 @@ Serve avatars from Gravatar with modern WebP/AVIF support, intelligent caching, 
 #label
 DailyHot API
 #describe
-一个热榜api, 可以获得大部分平台的排行榜, 或者是新闻.
+A hot top api that can obtain rankings or news from most platforms.
 ::
 ::
